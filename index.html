@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kopi Senja - Sistem Kasir & Pemesanan</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HALAMAN LOGIN -->
+    <div id="login-screen" class="login-container">
+        <div class="login-box">
+            <h2>☕ Kopi Senja POS</h2>
+            <p>Sistem Informasi Pemesanan & Kasir</p>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Username Kasir</label>
+                    <input type="text" id="username" placeholder="Masukkan: kasir" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Masukkan: 1234" required>
+                </div>
+                <button type="submit" class="btn-primary">Masuk ke Sistem</button>
+                <p id="login-error" class="error-msg"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- HALAMAN UTAMA APLIKASI -->
+    <div id="app-screen" class="app-container hidden">
+        <!-- Header / Navigasi -->
+        <header class="navbar">
+            <div class="brand">☕ <strong>Kopi Senja</strong> | Sistem Kasir</div>
+            <nav class="nav-tabs">
+                <button class="tab-btn active" onclick="switchTab('kasir')">Transaksi Kasir</button>
+                <button class="tab-btn" onclick="switchTab('menu')">Kelola Menu</button>
+                <button class="tab-btn" onclick="switchTab('laporan')">Laporan Penjualan</button>
+                <button class="btn-logout" onclick="logout()">Keluar</button>
+            </nav>
+        </header>
+
+        <!-- TAB 1: TRANSAKSI KASIR -->
+        <main id="tab-kasir" class="tab-content active">
+            <div class="pos-layout">
+                <!-- Kiri: Katalog Menu -->
+                <section class="menu-section">
+                    <div class="filter-bar">
+                        <input type="text" id="search-input" placeholder="Cari nama kopi atau makanan..." onkeyup="renderMenu()">
+                        <select id="category-filter" onchange="renderMenu()">
+                            <option value="Semua">Semua Kategori</option>
+                            <option value="Kopi">Kopi</option>
+                            <option value="Non-Kopi">Non-Kopi</option>
+                            <option value="Snack">Snack</option>
+                        </select>
+                    </div>
+                    <div id="menu-grid" class="menu-grid">
+                        <!-- Daftar menu akan muncul otomatis dari JavaScript -->
+                    </div>
+                </section>
+
+                <!-- Kanan: Keranjang & Pembayaran -->
+                <section class="cart-section">
+                    <h3>Pesanan Saat Ini</h3>
+                    <div class="customer-input">
+                        <input type="text" id="customer-name" placeholder="Nama Pelanggan / No. Meja" value="Pelanggan Umum">
+                    </div>
+                    
+                    <div id="cart-items" class="cart-items">
+                        <p class="empty-cart">Belum ada pesanan dipilih.</p>
+                    </div>
+
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotal-text">Rp 0</span>
+                        </div>
+                        <div class="summary-row discount-row">
+                            <span>Diskon (10% min. 100rb)</span>
+                            <span id="discount-text">- Rp 0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>PPN (10%)</span>
+                            <span id="tax-text">Rp 0</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <strong>Total Bayar</strong>
+                            <strong id="total-text">Rp 0</strong>
+                        </div>
+                        <button class="btn-checkout" onclick="processCheckout()">Proses & Cetak Struk</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- TAB 2: KELOLA MENU (CRUD) -->
+        <main id="tab-menu" class="tab-content hidden">
+            <div class="card">
+                <h3>Tambah Menu Baru</h3>
+                <form id="add-menu-form" class="inline-form">
+                    <input type="text" id="new-menu-name" placeholder="Nama Menu (misal: Caramel Macchiato)" required>
+                    <select id="new-menu-category">
+                        <option value="Kopi">Kopi</option>
+                        <option value="Non-Kopi">Non-Kopi</option>
+                        <option value="Snack">Snack</option>
+                    </select>
+                    <input type="number" id="new-menu-price" placeholder="Harga (Rp)" min="1000" required>
+                    <input type="number" id="new-menu-stock" placeholder="Stok Awal" min="1" required>
+                    <button type="submit" class="btn-primary">Simpan Menu</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h3>Daftar Menu Tersedia</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Nama Menu</th>
+                            <th>Kategori</th>
+                            <th>Harga</th>
+                            <th>Stok</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="manage-menu-tbody">
+                        <!-- Tabel kelola menu diisi oleh JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+
+        <!-- TAB 3: LAPORAN PENJUALAN -->
+        <main id="tab-laporan" class="tab-content hidden">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h4>Total Transaksi</h4>
+                    <p id="stat-total-tx">0</p>
+                </div>
+                <div class="stat-card">
+                    <h4>Total Pendapatan</h4>
+                    <p id="stat-total-income">Rp 0</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Riwayat Transaksi</h3>
+                    <button class="btn-danger" onclick="clearTransactions()">Reset Laporan</button>
+                </div>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID Struk</th>
+                            <th>Waktu</th>
+                            <th>Pelanggan</th>
+                            <th>Detail Item</th>
+                            <th>Total Bayar</th>
+                        </tr>
+                    </thead>
+                    <tbody id="report-tbody">
+                        <!-- Riwayat transaksi diisi oleh JS -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL STRUK PEMBAYARAN -->
+    <div id="receipt-modal" class="modal hidden">
+        <div class="modal-content">
+            <div id="receipt-print-area" class="receipt-paper">
+                <h4>☕ KOPI SENJA</h4>
+                <p class="receipt-sub">Jl. Merdeka No. 10 | Struk Pembayaran</p>
+                <hr>
+                <div id="receipt-details"></div>
+                <hr>
+                <p class="receipt-footer">Terima kasih atas kunjungan Anda!</p>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-primary" onclick="window.print()">Cetak Struk</button>
+                <button class="btn-secondary" onclick="closeModal()">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

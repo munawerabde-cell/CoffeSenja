@@ -1,0 +1,493 @@
+/* RESET & WARNA DASAR TEMA COFFEE SHOP */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary: #4A2C2A;      /* Cokelat Espresso */
+    --primary-hover: #361F1E;
+    --accent: #C68B59;       /* Cokelat Latte / Karamel */
+    --bg-cream: #F8F5F2;     /* Krem Lembut */
+    --white: #FFFFFF;
+    --text-dark: #2C2221;
+    --text-muted: #7A6B69;
+    --border: #E5DCD5;
+    --danger: #D9534F;
+    --success: #2E7D32;
+}
+
+body {
+    background-color: var(--bg-cream);
+    color: var(--text-dark);
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* HALAMAN LOGIN */
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #361F1E, #6F4E37);
+}
+
+.login-box {
+    background: var(--white);
+    padding: 2.5rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.login-box h2 {
+    color: var(--primary);
+    margin-bottom: 0.3rem;
+}
+
+.login-box p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 0.7rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-size: 0.95rem;
+}
+
+.error-msg {
+    color: var(--danger);
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+}
+
+/* TOMBOL */
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 0.75rem 1.2rem;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+    background-color: #E0D7D1;
+    color: var(--text-dark);
+    padding: 0.75rem 1.2rem;
+}
+
+.btn-danger {
+    background-color: var(--danger);
+    color: var(--white);
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+}
+
+/* NAVBAR */
+.navbar {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.brand {
+    font-size: 1.2rem;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 0.6rem;
+}
+
+.tab-btn {
+    background: transparent;
+    color: #E5DCD5;
+    padding: 0.5rem 1rem;
+}
+
+.tab-btn.active, .tab-btn:hover {
+    background-color: var(--accent);
+    color: var(--white);
+}
+
+.btn-logout {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: var(--white);
+    padding: 0.5rem 1rem;
+    margin-left: 1rem;
+}
+
+.btn-logout:hover {
+    background-color: var(--danger);
+}
+
+/* LAYOUT UTAMA */
+.tab-content {
+    padding: 1.5rem 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* POS LAYOUT (KASIR) */
+.pos-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1.5rem;
+}
+
+.filter-bar {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+
+.filter-bar input {
+    flex: 1;
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.filter-bar select {
+    padding: 0.7rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--white);
+}
+
+/* GRID KATALOG MENU */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem;
+}
+
+.menu-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.15s;
+}
+
+.menu-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(74, 44, 42, 0.08);
+}
+
+.menu-badge {
+    font-size: 0.75rem;
+    background: #F1E8E2;
+    color: var(--primary);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.menu-card h4 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+}
+
+.menu-price {
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 0.3rem;
+}
+
+.menu-stock {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.8rem;
+}
+
+.btn-add-cart {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 0.5rem;
+    width: 100%;
+    font-size: 0.85rem;
+}
+
+.btn-add-cart:disabled {
+    background-color: #CCC;
+    cursor: not-allowed;
+}
+
+/* KERANJANG (CART) */
+.cart-section {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+}
+
+.cart-section h3 {
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.customer-input input {
+    width: 100%;
+    padding: 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 1rem;
+}
+
+.cart-items {
+    min-height: 180px;
+    max-height: 320px;
+    overflow-y: auto;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 0.8rem 0;
+    margin-bottom: 1rem;
+}
+
+.empty-cart {
+    text-align: center;
+    color: var(--text-muted);
+    margin-top: 3rem;
+    font-size: 0.9rem;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px dashed var(--border);
+}
+
+.cart-item-info h5 {
+    font-size: 0.92rem;
+}
+
+.cart-item-info span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.qty-btn {
+    width: 24px;
+    height: 24px;
+    background: #EFEAE6;
+    color: var(--text-dark);
+    border-radius: 4px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.discount-row {
+    color: var(--success);
+}
+
+.total-row {
+    font-size: 1.1rem;
+    color: var(--primary);
+    border-top: 1px solid var(--border);
+    padding-top: 0.6rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.btn-checkout {
+    background-color: var(--success);
+    color: var(--white);
+    width: 100%;
+    padding: 0.85rem;
+    font-size: 1rem;
+}
+
+.btn-checkout:hover {
+    background-color: #236127;
+}
+
+/* CARD & TABEL (KELOLA MENU & LAPORAN) */
+.card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.card h3 {
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.inline-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr auto;
+    gap: 0.8rem;
+}
+
+.inline-form input, .inline-form select {
+    padding: 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.data-table th, .data-table td {
+    padding: 0.8rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.92rem;
+}
+
+.data-table th {
+    background-color: #F4EFEA;
+    color: var(--primary);
+}
+
+/* STATISTIK LAPORAN */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat-card {
+    background: var(--white);
+    border-left: 5px solid var(--accent);
+    padding: 1.3rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.stat-card h4 {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 0.4rem;
+}
+
+.stat-card p {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+/* MODAL STRUK */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 1.5rem;
+    border-radius: 10px;
+    width: 340px;
+}
+
+.receipt-paper {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.receipt-paper hr {
+    border: none;
+    border-top: 1px dashed #333;
+    margin: 0.7rem 0;
+}
+
+#receipt-details {
+    text-align: left;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 0.6rem;
+}
+
+/* KHUSUS SAAT CETAK STRUK */
+@media print {
+    body * { visibility: hidden; }
+    #receipt-print-area, #receipt-print-area * { visibility: visible; }
+    #receipt-print-area {
+        position: absolute;
+        left: 0; top: 0;
+        width: 100%;
+    }
+}
